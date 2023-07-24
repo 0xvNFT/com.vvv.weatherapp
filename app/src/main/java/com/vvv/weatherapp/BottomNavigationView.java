@@ -6,6 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import com.vvv.weatherapp.fragment.FirstFragment;
+import com.vvv.weatherapp.fragment.FourthFragment;
+import com.vvv.weatherapp.fragment.SecondFragment;
+import com.vvv.weatherapp.fragment.ThirdFragment;
+
 public class BottomNavigationView extends LinearLayout {
 
     public BottomNavigationView(Context context) {
@@ -34,28 +43,38 @@ public class BottomNavigationView extends LinearLayout {
         item1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                navigateToFragment(new FirstFragment());
             }
         });
 
         item2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                navigateToFragment(new SecondFragment());
             }
         });
 
         item3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                navigateToFragment(new ThirdFragment());
             }
         });
 
         item4.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                navigateToFragment(new FourthFragment());
             }
         });
     }
 
-
-    // Add any helper methods or public APIs here to customize the bottom navigation view
+    private void navigateToFragment(Fragment fragment) {
+        if (fragment != null) {
+            FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, fragment)
+                    .commit();
+        }
+    }
 }

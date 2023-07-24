@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.vvv.weatherapp.fragment.FirstFragment;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -20,10 +22,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentContainer, new FirstFragment())
+                    .commit();
+        }
+
         LinearLayout bottomNavigation = findViewById(R.id.bottomNavigation);
         getWindow().setBackgroundDrawable(null);
         Drawable windowBackground = getWindow().getDecorView().getBackground();
-        BitmapDrawable blurredBackground = blurDrawable(windowBackground, 25); // Adjust the blur intensity as needed
+        BitmapDrawable blurredBackground = blurDrawable(windowBackground, 25);
         bottomNavigation.setBackground(blurredBackground);
     }
 
